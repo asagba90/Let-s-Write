@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, make_response
 import config
 import blog
 
@@ -22,6 +22,7 @@ def index():
             blogT = blog.generateBlogTopics(prompt)
             blogTopicIdeas = blogT.replace('\n', '<br>')
 
+
         if 'form2' in request.form:
             prompt = request.form['blogSection']
             blogT = blog.generateBlogSections(prompt)
@@ -35,6 +36,17 @@ def index():
 
     return render_template('index.html', **locals())
 
+@app.route('/getAnswer', methods=['GET', "POST"])
+def get_aswers():
+    req = request.get_json()
+    question = req['prompt']
+    generated = blog.answerQuestion(question)
+    
+    res = make_response(jsonify({"answer": generated}), 200)
+    return res
+
+
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='8888', debug=True)
+    app.run(host='0.0.0.0', port='8888', debug=True) 

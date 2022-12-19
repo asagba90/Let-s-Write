@@ -8,6 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 
     <title>Lets Write</title>
 
@@ -29,6 +31,26 @@
 
       <div class="row">
         <div class="col-lg-6">
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="text_area" rows="10" cols="50"></textarea>
+    
+            <label for="blogTopic" class="form-label">What do you want to Know?</label>
+            <input type="text" class="form-control" id="Ask" name="Ask Anything" placeholder="Enter Your Question">
+            <br>
+            <button  id="blogTopicButton" class="btn btn-primary" onclick="change();">Generate Answers</button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+
+
+      <div class="row">
+        <div class="col-lg-6">
           <form class="" action="/" method="post">
             <div class="mb-3">
               <label for="blogTopic" class="form-label">What topic do you want to get blog ideas on?</label>
@@ -43,7 +65,7 @@
 
 
         <div class="col-lg-6">
-          1. {{blogTopicIdeas|safe}}
+          1. {{blogTopic|safe}}
         </div>
       </div>
 
